@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -lm -g
+CFLAGS = -lm -g -std=c99
 
 imageloader: imageloader.o imageloadertester.o
 	$(CC) -o imageloadertester imageloader.o imageloadertester.o $(CFLAGS)
