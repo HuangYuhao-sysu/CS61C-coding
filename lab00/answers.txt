@@ -1,0 +1,4 @@
+1.grep -rn 'keywords' .
+2.top I think?
+3.Ctrl C
+4.file cmp?

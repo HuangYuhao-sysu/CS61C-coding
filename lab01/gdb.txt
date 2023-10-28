@@ -1,0 +1,9 @@
+1.Set arguments using set args, example: "set args 1 2 3"
+2.Using break cmd, eample "break hello.c:8", set a breakpoint on line 8 of hello.c
+3.Use "n" or "s" I can step next line, "n" step over while "s" step into.
+4.Use "s" to step into a function call.
+5.Use "c" to continue the program.
+6.Use "p/display variable_name" to trace the value
+7.Hei! Use display!
+8.Use "info locals"
+9.Use "quit"
