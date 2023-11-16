@@ -60,10 +60,8 @@ class TestRelu(TestCase):
         t.input_scalar("a1", len(array0))
         # call the relu function
         t.call("relu")
-        # check that the array0 was changed appropriately
-        t.check_scalar("a0", 78)
         # generate the `assembly/TestRelu_test_simple.s` file and run it through venus
-        t.execute()
+        t.execute(code=78)
 
     @classmethod
     def tearDownClass(cls):
@@ -96,10 +94,8 @@ class TestArgmax(TestCase):
         t.input_scalar("a1", len(array0))
         # call the relu function
         t.call("argmax")
-        # check that the array0 was changed appropriately
-        t.check_scalar("a0", 77)
         # generate the `assembly/TestRelu_test_simple.s` file and run it through venus
-        t.execute()
+        t.execute(code=77)
 
     @classmethod
     def tearDownClass(cls):
@@ -157,9 +153,7 @@ class TestDot(TestCase):
         t.input_scalar("a4", 1)
         # call the `dot` function
         t.call("dot")
-        # check the return value
-        t.check_scalar("a0", 75)
-        t.execute()
+        t.execute(code=75)
 
     def test_corner2(self):
         t = AssemblyTest(self, "dot.s")
@@ -175,9 +169,7 @@ class TestDot(TestCase):
         t.input_scalar("a4", 1)
         # call the `dot` function
         t.call("dot")
-        # check the return value
-        t.check_scalar("a0", 76)
-        t.execute()
+        t.execute(code=76)
 
     @classmethod
     def tearDownClass(cls):
@@ -197,17 +189,20 @@ class TestMatmul(TestCase):
         array_out = t.array([0] * len(result))
 
         # load address of input matrices and set their dimensions
-        raise NotImplementedError("TODO")
-        # TODO
+        t.input_array("a0", array0)
+        t.input_scalar("a1", m0_rows)
+        t.input_scalar("a2", m0_cols)
+        t.input_array("a3", array1)
+        t.input_scalar("a4", m1_rows)
+        t.input_scalar("a5", m1_cols)
         # load address of output array
-        # TODO
-
+        t.input_array("a6", array_out)
         # call the matmul function
         t.call("matmul")
 
         # check the content of the output array
-        # TODO
-
+        if code == 0:
+            t.check_array(array_out, result)
         # generate the assembly file and run it through venus, we expect the simulation to exit with code `code`
         t.execute(code=code)
 
@@ -216,6 +211,30 @@ class TestMatmul(TestCase):
             [1, 2, 3, 4, 5, 6, 7, 8, 9], 3, 3,
             [1, 2, 3, 4, 5, 6, 7, 8, 9], 3, 3,
             [30, 36, 42, 66, 81, 96, 102, 126, 150]
+        )
+    
+    def test_corner1(self):
+        self.do_matmul(
+            [1, 2, 3, 4], 0, 2,
+            [1, 2, 3, 4], 2, 2,
+            [],
+            72
+        )
+
+    def test_corner2(self):
+        self.do_matmul(
+            [1, 2, 3, 4], 2, 2,
+            [1, 2, 3, 4], 2, 0,
+            [],
+            73
+        )
+
+    def test_corner3(self):
+        self.do_matmul(
+            [1, 2, 3, 4], 2, 2,
+            [1, 2, 3, 4], 3, 3,
+            [],
+            74
         )
 
     @classmethod
@@ -235,20 +254,32 @@ class TestReadMatrix(TestCase):
         cols = t.array([-1])
 
         # load the addresses to the output parameters into the argument registers
-        raise NotImplementedError("TODO")
-        # TODO
-
+        t.input_array("a1", rows)
+        t.input_array("a2", cols)
         # call the read_matrix function
         t.call("read_matrix")
 
         # check the output from the function
-        # TODO
-
+        t.check_array(rows, [3])
+        t.check_array(cols, [3])
+        t.check_array_pointer("a0", [1, 2, 3, 4, 5, 6, 7, 8, 9])
         # generate assembly and run it through venus
         t.execute(fail=fail, code=code)
 
-    def test_simple(self):
+    def test_simple1(self):
         self.do_read_matrix()
+
+    def test_simple2(self):
+        self.do_read_matrix('fopen', 90)
+
+    def test_simple3(self):
+        self.do_read_matrix('fread', 91)
+
+    def test_simple4(self):
+        self.do_read_matrix('malloc', 88)
+
+    def test_simple5(self):
+        self.do_read_matrix('fclose', 92)
 
     @classmethod
     def tearDownClass(cls):
@@ -263,17 +294,29 @@ class TestWriteMatrix(TestCase):
         # load output file name into a0 register
         t.input_write_filename("a0", outfile)
         # load input array and other arguments
-        raise NotImplementedError("TODO")
-        # TODO
+        array = t.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        t.input_array("a1", array)
+        t.input_scalar("a2", 3)
+        t.input_scalar("a3", 3)
         # call `write_matrix` function
         t.call("write_matrix")
         # generate assembly and run it through venus
         t.execute(fail=fail, code=code)
         # compare the output file against the reference
-        t.check_file_output(outfile, "outputs/test_write_matrix/reference.bin")
+        if code == 0:
+            t.check_file_output(outfile, "outputs/test_write_matrix/reference.bin")
 
-    def test_simple(self):
+    def test_simple1(self):
         self.do_write_matrix()
+
+    def test_simple2(self):
+        self.do_write_matrix('fopen', 93)
+
+    def test_simple3(self):
+        self.do_write_matrix('fwrite', 94)
+
+    def test_simple4(self):
+        self.do_write_matrix('fclose', 95)
 
     @classmethod
     def tearDownClass(cls):
@@ -304,9 +347,9 @@ class TestClassify(TestCase):
         t.execute(args=args)
 
         # compare the output file and
-        raise NotImplementedError("TODO")
-        # TODO
+        t.check_file_output(out_file, ref_file)
         # compare the classification output with `check_stdout`
+        t.check_stdout("2")
 
     @classmethod
     def tearDownClass(cls):
