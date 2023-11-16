@@ -49,15 +49,13 @@ endif1:
     j loop_start
 loop_end:
     mv a0 ,zero
-    j exit
-error:
-    addi a0, zero, 78
-    j exit
-exit:
     # Epilogue
     lw s0, 0(sp)
     lw s1, 4(sp)
     lw s2, 8(sp)
     addi sp, sp, 12
+    j exit
     # end
-    ret
+error:
+    addi a1, zero, 78
+    j exit2

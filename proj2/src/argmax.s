@@ -60,8 +60,8 @@ loop_end:
     mv a0, s2
     j exit
 error:
-    addi a0, zero, 77
-    j exit
+    addi a1, zero, 77
+    j exit2
 exit:
     # Epilogue
     lw s0, 0(sp)

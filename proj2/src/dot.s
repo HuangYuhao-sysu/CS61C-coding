@@ -61,11 +61,11 @@ loop_end:
     mv a0, s8
     j exit
 error1:
-    addi, a0, zero, 75
-    j exit
+    addi, a1, zero, 75
+    j exit2
 error2:
-    addi, a0, zero, 76
-    j exit
+    addi, a1, zero, 76
+    j exit2
 exit:
     # Epilogue
     lw s0, 0(sp)
