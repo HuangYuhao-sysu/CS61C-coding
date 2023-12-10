@@ -1,0 +1,20 @@
+--- not autograded ---
+
+Part 1
+    blocksize = 20, n = 100: Testing naive transpose: 0.006 milliseconds, Testing transpose with blocking: 0.009 milliseconds
+    blocksize = 20, n = 1000: Testing naive transpose: 1.04 milliseconds, Testing transpose with blocking: 1.037 milliseconds
+    blocksize = 20, n = 2000: Testing naive transpose: 16.38 milliseconds, Testing transpose with blocking: 10.505 milliseconds
+    blocksize = 20, n = 5000: Testing naive transpose: 126.83 milliseconds, Testing transpose with blocking: 61.714 milliseconds
+    blocksize = 20, n = 10000: Testing naive transpose: 887.276 milliseconds, Testing transpose with blocking: 315.684 milliseconds
+
+    Checkoff Question 1: point n = 2000
+    Checkoff Question 2: for the too small size of n, it will not outsize the cache, and will not has any effect to cache performance (miss rate).
+
+Part 2
+    blocksize = 50, n = 10000: Testing naive transpose: 927.281 milliseconds, Testing transpose with blocking: 312.906 milliseconds
+    blocksize = 100, n = 10000: Testing naive transpose: 897.735 milliseconds, Testing transpose with blocking: 466.211 milliseconds
+    blocksize = 500, n = 10000: Testing naive transpose: 940.988 milliseconds, Testing transpose with blocking: 275.398 milliseconds
+    blocksize = 1000, n = 10000: Testing naive transpose: 923.354 milliseconds, Testing transpose with blocking: 327.848 milliseconds
+    blocksize = 5000, n = 10000: Testing naive transpose: 956.787 milliseconds, Testing transpose with blocking: 703.753 milliseconds
+
+    Checkoff Question 3: as blockszie increases, looks there is a sweet point of the performance of cache blocking. Maybe blocksize cannot be to small for effective blocking, and cannot be too large for capacity miss.

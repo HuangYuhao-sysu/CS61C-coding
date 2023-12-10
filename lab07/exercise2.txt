@@ -1,0 +1,8 @@
+1. jki and kji
+2. ikj and kij
+
+--- lines below are ignored by the AG ---
+
+Checkoff Question 1: When i is in the most inner loop, the step of A, B, C is 1, 0, 1, which is the smallest.
+Checkoff Question 2: When j is in the most inner loop, the step of A, B, C is 0, n, n, which is the biggest.
+Checkoff Question 3: When the step is as small as we can, we can utilize the spatial locality as well as we can.

@@ -1,0 +1,24 @@
+Scenario 1
+    1. Step size*Words, Cache size
+    2. 0
+    3. Step size: 1, Option: 1
+
+Scenario 2
+    1. 32
+    2. MHHH, 3/4 = 75%
+    3. Cache size equal to Array size, so after initialize, we can always hit the cache.
+
+Scenario 3
+    1. [L1 50%], [L2 0%], [Overall 50%]
+    2. [32 of L1 accesses], [16 of L1 misses]
+    3. 16
+    4. Recap increase, because of the misses of L2 are all compulsory misses.
+    5. (1) = =, (2) + =
+
+--- lines below are ignored by the AG ---
+
+Checkoff Question 1: We always miss because the step size equals to cache size.
+Checkoff Question 2: Step size and Option.
+Checkoff Question 3: The first time miss is compulsory miss, and then we get a write hit. the next loop we also get a hit because of the block size is two times of step size.
+Checkoff Question 4: After initialize and because of the cache size equals to array size, the cache can be get very hot!
+Checkoff Question 5: We can split the array to 4 parts, every part of array size is 256, which is equals to the cache size, we apply all functions to one part and followed by the next part of the splited array.
