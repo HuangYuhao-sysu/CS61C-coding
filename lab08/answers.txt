@@ -1,0 +1,19 @@
+Exercise 1:
+    1. 8
+    2. 6, 4, 0, 4
+    3. yes, if main memory has space, and the program use the page it has reached, there would be always page hit.
+
+Exercise 2:
+    1. 00, 20, 40, 60, 80, a0, c0, e0, 00, 20
+
+Exercise 3:
+    1. Physical memory size
+
+--- lines below are ignored by the AG ---
+
+Exercise 1 Checkoff Questions:
+    1. The first step is to access MMU, the MMU will check if the PPN is in TLB or miss, if hit, we can get PA and followed data. if miss, check if the PPN is in page table, if hit, we can get PPN in page table. if miss, there will be a page fault.
+    2. because the physical memory size is 4, use only 2 bits can get data in it, the VPN has 3 bits or more, is determined by design or program.
+
+Exercise 4 Checkoff Question:
+    1. P1,2,3,4, I think they are maybe processores, this is a multicore system. Because there are only one TLB, but has four cores, the TLB is too small to get a high hit rate.
